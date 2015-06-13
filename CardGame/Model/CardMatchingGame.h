@@ -14,8 +14,15 @@
 - (instancetype) initWithCardCount: (NSUInteger)count
                          usingDeck: (Deck *)deck;
 
+
+
 - (Card *) cardAtIndex: (NSUInteger)index;
 -(void) chooseCardAtIndex: (NSUInteger)index;
+
+-(void) chooseCardAtIndex: (NSUInteger)index
+              isThreeMode: (BOOL)isThreeMode;
+
+
 
 @property (nonatomic,readonly) NSInteger score;
 

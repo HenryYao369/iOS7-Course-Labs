@@ -80,14 +80,14 @@
 			children = (
 				2DF2B8951B291D39005172A8 /* CardMatchingGame.h */,
 				2DF2B8961B291D39005172A8 /* CardMatchingGame.m */,
-				2D34A6C61B2601B200D539B1 /* Card.h */,
-				2D34A6C71B2601B200D539B1 /* Card.m */,
 				2D34A6CA1B267C0F00D539B1 /* PlayingCard.h */,
 				2D34A6CB1B267C0F00D539B1 /* PlayingCard.m */,
-				2D34A6CD1B267C5500D539B1 /* Deck.h */,
-				2D34A6CE1B267C5500D539B1 /* Deck.m */,
 				2D34A6D01B268DF200D539B1 /* PlayingCardDeck.h */,
 				2D34A6D11B268DF200D539B1 /* PlayingCardDeck.m */,
+				2D34A6C61B2601B200D539B1 /* Card.h */,
+				2D34A6C71B2601B200D539B1 /* Card.m */,
+				2D34A6CD1B267C5500D539B1 /* Deck.h */,
+				2D34A6CE1B267C5500D539B1 /* Deck.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";

@@ -17,6 +17,10 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 
+
+@property (weak, nonatomic) IBOutlet UISwitch *isThreeControlOutlet;
+@property (nonatomic) BOOL isThree;
+
 @end
 
 @implementation ViewController
@@ -33,10 +37,29 @@
     return [[PlayingCardDeck alloc] init];
 }
 
+- (IBAction)switchTwoOrThree:(UISwitch *)sender {
+    self.isThree = sender.isOn;
+//    if (self.isThree) {
+//        NSLog(@"3");
+//    }
+//    else NSLog(@"2");
+    
+}
 
 - (IBAction)touchCardButton:(UIButton *)sender {
+    
+    self.isThreeControlOutlet.enabled = FALSE;
+    
     NSUInteger chosenButtonIndex = [self.cardButtons indexOfObject:sender];
-    [self.game chooseCardAtIndex:chosenButtonIndex];
+    
+    if (!self.isThree) {
+        [self.game chooseCardAtIndex:chosenButtonIndex];
+
+    }
+    else{
+        [self.game chooseCardAtIndex:chosenButtonIndex isThreeMode:YES];
+    }
+    
     [self updateUI];
 
     
@@ -46,6 +69,8 @@
     
     _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                               usingDeck:[self createDeck]];
+    
+    self.isThreeControlOutlet.enabled = true;
     [self updateUI];
     
 }
@@ -60,10 +85,9 @@
         [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self backgroundImageForCard:card]
                               forState:UIControlStateNormal];
-        
         cardButton.enabled = !card.isMatched;
         
-        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld",self.game.score];
+        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld",self.game.score]; // 作业：MVC!
         
     }
     
