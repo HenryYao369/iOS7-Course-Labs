@@ -13,6 +13,9 @@
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *cards; // of Card
 
+//@property (nonatomic) int previousChosenCardCount;
+//@property (nonatomic,strong) Card *previousChosenCard;
+
 @end
 
 
@@ -53,7 +56,60 @@ static const int COST_TO_CHOOSE = 1;
 -(void) chooseCardAtIndex: (NSUInteger)index
               isThreeMode: (BOOL)isThreeMode{
     
-    [self chooseCardAtIndex:index];
+//    [self chooseCardAtIndex:index];
+    Card *card = [self cardAtIndex:index];
+    
+    int previousChosenCardCount = 0;
+    Card *previousChosenCard;
+    
+    if (!card.isMatched) {
+        if (card.isChosen) {
+            card.chosen = NO;
+        }
+        else{
+            for (Card *otherCard in self.cards) {
+                
+                
+                if ( !otherCard.isMatched && otherCard.isChosen) {
+                    
+                    if (previousChosenCardCount == 1) {
+                        int matchScore = [card match :@[otherCard,previousChosenCard]];
+                        
+                        //do sth
+                        if (matchScore) {
+                            self.score += matchScore * MATCH_BONUS;
+                            previousChosenCard.matched = YES;
+                            otherCard.matched = YES;
+                            card.matched = YES;
+                        }
+                        else{
+                            self.score -= MISMATCH_PENALTY;
+                            previousChosenCard.chosen = NO;
+                            otherCard.chosen = NO;
+                            
+                        }
+                        
+                        // set status
+                        previousChosenCardCount = 0;
+                        break;
+                    }
+                    else{ //previousChosenCardCount == 0
+                        previousChosenCardCount++;
+                        previousChosenCard = otherCard;
+                    }
+                    
+                }
+                
+                
+            }// for
+            
+            self.score -= COST_TO_CHOOSE;            
+            card.chosen = YES;
+        }
+    
+        
+        
+    }
     
 }
 
@@ -81,7 +137,7 @@ static const int COST_TO_CHOOSE = 1;
                     break;
                 }
                 
-            }
+            }// for
             
             self.score -= COST_TO_CHOOSE;
         

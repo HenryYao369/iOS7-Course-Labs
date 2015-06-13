@@ -11,20 +11,64 @@
 @implementation PlayingCard
 
 - (int) match:(NSArray *)otherCards{
+    
     int score = 0;
     
     if ([otherCards count]==1) {
         PlayingCard *otherCard = [otherCards firstObject];
-        if (otherCard.rank == self.rank) {
+        score = [self matchTwoCards:otherCard];
+        
+    }
+    
+    if ([otherCards count] == 2) {
+        PlayingCard *firstCard = [otherCards firstObject], *secondCard = [otherCards lastObject];
+        
+        if (firstCard.rank == secondCard.rank && secondCard.rank == self.rank && self.rank == firstCard.rank) {
+            score = 16;
+        }else if ([firstCard.suit isEqualToString:self.suit] && [secondCard.suit isEqualToString:self.suit] && [firstCard.suit isEqualToString:secondCard.suit]){
             score = 4;
-        }else if([otherCard.suit isEqualToString:self.suit]){
-            score = 1;
+        }
+        else {
+            score = MAX(MAX([self matchTwoCards:firstCard], [self matchTwoCards:secondCard]), [firstCard  matchTwoCards:secondCard])  ;
+            
         }
         
     }
     
+    
+    
     return score;
 }
+
+// the match method in the past.
+//- (int) matchPast:(NSArray *)otherCards{ // match 2 cards
+//    int score = 0;
+//    
+//    if ([otherCards count]==1) {
+//        PlayingCard *otherCard = [otherCards firstObject];
+//        if (otherCard.rank == self.rank) {
+//            score = 4;
+//        }else if([otherCard.suit isEqualToString:self.suit]){
+//            score = 1;
+//        }
+//        
+//    }
+//    
+//    return score;
+//}
+
+- (int) matchTwoCards:(PlayingCard *)otherCard{ // match 2 cards
+    int score = 0;
+    
+    if (otherCard.rank == self.rank) {
+        score = 4;
+    }else if([otherCard.suit isEqualToString:self.suit]){
+        score = 1;
+    }
+    
+    return score;
+}
+
 
 - (NSString *)contents{
     
