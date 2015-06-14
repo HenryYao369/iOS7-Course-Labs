@@ -157,11 +157,19 @@
                                     <action selector="reDealButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZOm-Gz-l2a"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BRx-Tf-BVU">
+                                <rect key="frame" x="16" y="579" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="hintLabel" destination="BRx-Tf-BVU" id="JcO-kU-HIB"/>
                         <outlet property="isThreeControlOutlet" destination="1yn-bD-cjg" id="crC-Zr-BUe"/>
                         <outlet property="scoreLabel" destination="Tgl-qW-ZGe" id="QAU-qj-f5R"/>
                         <outletCollection property="cardButtons" destination="8wD-4f-L4N" id="K8H-3n-oO4"/>
